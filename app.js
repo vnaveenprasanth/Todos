@@ -35,7 +35,7 @@ todoList[0].addEventListener('click', (e) => {
         const p = e.target.previousSibling;
         const val = p.innerText;
         const li = p.closest('li');
-        li.remove()
+        // li.remove()
         deletetodoItem(val);
     }
 })
@@ -43,6 +43,8 @@ todoList[0].addEventListener('click', (e) => {
 function deletetodoItem(val) {
     const arr = listArray.filter((el) =>  el != val);
     listArray = arr;
+    todoList[0].innerHTML = '';
+    createtodoItem(listArray);
     localStorage.setItem("TodoArray", JSON.stringify(listArray));
 }
 
