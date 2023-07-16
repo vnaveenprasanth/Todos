@@ -31,17 +31,24 @@ submitBtn.addEventListener('click', () => {
 })
 
 todoList[0].addEventListener('click', (e) => {
+    if (e.target.tagName === 'P') {
+        const val = e.target.innerText;
+        input.value = val;
+        deletetodoItem(val)
+    }
+
     if (e.target.tagName === 'svg') {
         const p = e.target.previousSibling;
+        p.closest('li').classList.toggle('strike');
         const val = p.innerText;
-        const li = p.closest('li');
-        // li.remove()
-        deletetodoItem(val);
+        setTimeout(() => {
+            deletetodoItem(val);
+        }, 500)
     }
-})
+});
 
 function deletetodoItem(val) {
-    const arr = listArray.filter((el) =>  el != val);
+    const arr = listArray.filter((el) => el != val);
     listArray = arr;
     todoList[0].innerHTML = '';
     createtodoItem(listArray);
